@@ -1,0 +1,25 @@
+.button {
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    background-color: rgba(242,245,247,255);
+    border-radius: 2px;
+    border: 1px solid rgb(206, 201, 201);
+    cursor: pointer;
+    font-weight: 700;
+    color: rgb(117, 116, 116);
+}
+
+.selected {
+    background-color: white;
+    color: #158fff;
+}
+
+.large {
+    padding: 0.5rem 5rem;
+    font-size: 18px;
+}
+
+.success {
+    background-color: #1bc982;
+    color: white;
+}

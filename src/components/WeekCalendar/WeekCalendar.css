@@ -1,0 +1,10 @@
+.week-container {
+  flex-grow: 1; /* Let the input container take the remaining space */
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.button-container {
+  width: 100%;
+
+}

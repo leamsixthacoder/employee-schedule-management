@@ -1,0 +1,27 @@
+@import "tailwindcss";
+* {
+  font-family: "Yrsa", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.employee-details, .switch-details, .actions-container {
+    background-color: #f2f5f7;
+    padding: 1rem 0;
+}
+.shift-details {
+  background-color: #eaeef2;
+  padding: 1rem 0;
+}
+
+.switch-details {
+    display: flex;
+    justify-content: start;
+}
+.actions-container {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+    padding: 1rem 2rem;
+}
