@@ -8,9 +8,13 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "json-server data.json --port 5000"
+    "server": "json-server data.json --port 5000",
+    "server2": "json-server shift.json --port 5001"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.1",
     "@tailwindcss/vite": "^4.0.0",
     "@tanstack/react-table": "^8.20.5",
     "json-server": "^1.0.0-beta.3",

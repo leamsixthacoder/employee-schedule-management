@@ -6,11 +6,11 @@
   font-style: normal;
 }
 
-.employee-details, .switch-details, .actions-container {
+.employee-details, .shift-details, .actions-container {
     background-color: #f2f5f7;
     padding: 1rem 0;
 }
-.shift-details {
+.switch-details {
   background-color: #eaeef2;
   padding: 1rem 0;
 }

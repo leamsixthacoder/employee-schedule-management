@@ -7,8 +7,9 @@ interface TimeOption {
   period: string;
 }
 interface Props {
-    label: string
-
+  label: string
+  initialTime?: string
+  onTimeChange?: (time: string) => void;
 }
 
 // Function to generate time options
@@ -26,9 +27,9 @@ const generateTimeOptions = (interval: number): TimeOption[] => {
   return options;
 };
 
-export const TimePicker = ({label}:Props) => {
+export const TimePicker = ({ label, initialTime, onTimeChange }: Props) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [selectedTime, setSelectedTime] = useState<string>("");
+  const [selectedTime, setSelectedTime] = useState<string>(initialTime || "");
   const timepickerRef = useRef<HTMLDivElement | null>(null);
   const toggleRef = useRef<HTMLSpanElement | null>(null);
   const [times] = useState<TimeOption[]>(generateTimeOptions(15));
@@ -40,8 +41,10 @@ export const TimePicker = ({label}:Props) => {
 
   // Handle time selection
   const handleTimeSelection = (hour: string, minute: string, period: string): void => {
-    setSelectedTime(`${hour} ${minute} ${period}`);
+    const newTime = `${hour} ${minute} ${period}`
+    setSelectedTime(newTime);
     setIsVisible(false);
+    onTimeChange?.(newTime)
   };
 
   // Close timepicker when clicking outside
@@ -61,6 +64,9 @@ export const TimePicker = ({label}:Props) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+
+
+
   return (
     <>
       <style>
@@ -77,58 +83,58 @@ export const TimePicker = ({label}:Props) => {
         `}
       </style>
 
- 
-              <div className="mb-8">
-                <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
-                  {label}
-                </label>
 
-                <div className="relative">
-                  {/* Timepicker Input with Icons */}
-                  <div className="relative flex items-center">
-                    {/* Clock Icon */}
-                    <span className="absolute left-0 pl-5 text-dark-5">
-                      <svg
-                        className="fill-current"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g clipPath="url(#clip0_3185_947)">
-                          <path
-                            d="M10.4687 10.3125V5.28125C10.4687 4.90625 10.1562 4.59375 9.78125 4.59375C9.40625 4.59375 9.09375 4.90625 9.09375 5.28125V10.5937C9.09375 10.7812 9.15625 10.9687 9.28125 11.0937L12.75 14.625C12.875 14.75 13.0625 14.8437 13.25 14.8437C13.4375 14.8437 13.5937 14.7812 13.75 14.6562C14.0312 14.375 14.0312 13.9375 13.75 13.6562L10.4687 10.3125Z"
-                            fill=""
-                          />
-                          <path
-                            d="M10 0.46875C4.78125 0.46875 0.5625 4.75 0.5625 10C0.5625 15.25 4.8125 19.5312 10 19.5312C15.1875 19.5312 19.4375 15.25 19.4375 10C19.4375 4.75 15.2188 0.46875 10 0.46875ZM10 18.125C5.5625 18.125 1.9375 14.4688 1.9375 10C1.9375 5.53125 5.5625 1.875 10 1.875C14.4375 1.875 18.0625 5.53125 18.0625 10C18.0625 14.4688 14.4375 18.125 10 18.125Z"
-                            fill=""
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_3185_947">
-                            <rect width="20" height="20" fill="white" />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                    </span>
+      <div className="mb-2">
+        <label className="mb-[2px] block text-sm font-extrabold text-dark dark:text-white">
+          {label}
+        </label>
 
-                    <input
-                      id="timepicker"
-                      type="text"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-2.5 pl-[50px] pr-8 text-dark-2 outline-none transition focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"
-                      placeholder="Hora"
-                      readOnly
-                      value={selectedTime}
-                      onClick={toggleTimepickerVisibility}
-                    />
-                    <span
-                      className="absolute right-0 cursor-pointer pr-4 text-dark-5"
-                      ref={toggleRef}
-                    >
-                      {/* Arrow Down Icon */}
-                      {/* <svg
+        <div className="relative">
+          {/* Timepicker Input with Icons */}
+          <div className="relative flex items-center">
+            {/* Clock Icon */}
+            <span className="absolute left-0 pl-2 text-dark-5">
+              <svg
+                className="fill-current"
+                width="10"
+                height="10"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clipPath="url(#clip0_3185_947)">
+                  <path
+                    d="M10.4687 10.3125V5.28125C10.4687 4.90625 10.1562 4.59375 9.78125 4.59375C9.40625 4.59375 9.09375 4.90625 9.09375 5.28125V10.5937C9.09375 10.7812 9.15625 10.9687 9.28125 11.0937L12.75 14.625C12.875 14.75 13.0625 14.8437 13.25 14.8437C13.4375 14.8437 13.5937 14.7812 13.75 14.6562C14.0312 14.375 14.0312 13.9375 13.75 13.6562L10.4687 10.3125Z"
+                    fill=""
+                  />
+                  <path
+                    d="M10 0.46875C4.78125 0.46875 0.5625 4.75 0.5625 10C0.5625 15.25 4.8125 19.5312 10 19.5312C15.1875 19.5312 19.4375 15.25 19.4375 10C19.4375 4.75 15.2188 0.46875 10 0.46875ZM10 18.125C5.5625 18.125 1.9375 14.4688 1.9375 10C1.9375 5.53125 5.5625 1.875 10 1.875C14.4375 1.875 18.0625 5.53125 18.0625 10C18.0625 14.4688 14.4375 18.125 10 18.125Z"
+                    fill=""
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_3185_947">
+                    <rect width="20" height="20" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </span>
+
+            <input
+              id="timepicker"
+              type="text"
+              className="w-[6.5rem] h-[2.1rem]  rounded-[4px] border border-stroke bg-transparent py-2.5 pl-[22px] pr-2 text-dark-2 outline-none transition focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"
+              placeholder="Hora"
+              readOnly
+              value={selectedTime}
+              onClick={toggleTimepickerVisibility}
+            />
+            <span
+              className="absolute right-0 cursor-pointer pr-4 text-dark-5"
+              ref={toggleRef}
+            >
+              {/* Arrow Down Icon */}
+              {/* <svg
                         className="fill-current stroke-current"
                         width="16"
                         height="16"
@@ -142,66 +148,62 @@ export const TimePicker = ({label}:Props) => {
                           stroke=""
                         />
                       </svg> */}
-                    </span>
-                  </div>
+            </span>
+          </div>
 
-                  {/* Timepicker Container */}
-                  {isVisible && (
+          {/* Timepicker Container */}
+          {isVisible && (
+            <div
+              ref={timepickerRef}
+              className="z-10 shadow-datepicker no-scrollbar absolute right-0 mt-2 h-[212px] w-[162px] overflow-hidden overflow-y-auto rounded-md border border-stroke bg-white p-2 dark:border-dark-3 dark:bg-dark-2"
+            >
+              {times.map((time, index) => {
+                const timeString = `${time.hour} ${time.minute} ${time.period}`;
+                const isSelected = timeString === selectedTime;
+                return (
+                  <div
+                    key={index}
+                    className={`time-option flex cursor-pointer justify-between gap-1 rounded-md transition ${isSelected ? "selected-time" : ""
+                      }`}
+                    onClick={() =>
+                      handleTimeSelection(
+                        time.hour,
+                        time.minute,
+                        time.period
+                      )
+                    }
+                  >
                     <div
-                      ref={timepickerRef}
-                      className="z-10 shadow-datepicker no-scrollbar absolute right-0 mt-2 h-[262px] w-[162px] overflow-hidden overflow-y-auto rounded-md border border-stroke bg-white p-2 dark:border-dark-3 dark:bg-dark-2"
+                      className={`hour flex h-[46px] w-full max-w-[46px] items-center justify-center rounded-md text-sm font-medium ${isSelected
+                          ? "bg-blue-light-5 text-primary"
+                          : "text-dark-3 dark:text-dark-6"
+                        }`}
                     >
-                      {times.map((time, index) => {
-                        const timeString = `${time.hour} ${time.minute} ${time.period}`;
-                        const isSelected = timeString === selectedTime;
-                        return (
-                          <div
-                            key={index}
-                            className={`time-option flex cursor-pointer justify-between gap-1 rounded-md transition ${
-                              isSelected ? "selected-time" : ""
-                            }`}
-                            onClick={() =>
-                              handleTimeSelection(
-                                time.hour,
-                                time.minute,
-                                time.period
-                              )
-                            }
-                          >
-                            <div
-                              className={`hour flex h-[46px] w-full max-w-[46px] items-center justify-center rounded-md text-sm font-medium ${
-                                isSelected
-                                  ? "bg-blue-light-5 text-primary"
-                                  : "text-dark-3 dark:text-dark-6"
-                              }`}
-                            >
-                              {time.hour}
-                            </div>
-                            <div
-                              className={`minute flex h-[46px] w-full max-w-[46px] items-center justify-center rounded-md text-sm font-medium ${
-                                isSelected
-                                  ? "bg-blue-light-5 text-primary"
-                                  : "text-dark-3 dark:text-dark-6"
-                              }`}
-                            >
-                              {time.minute}
-                            </div>
-                            <div
-                              className={`period flex h-[46px] w-full max-w-[46px] items-center justify-center rounded-md text-sm font-medium ${
-                                isSelected
-                                  ? "bg-blue-light-5 text-primary"
-                                  : "text-dark-3 dark:text-dark-6"
-                              }`}
-                            >
-                              {time.period}
-                            </div>
-                          </div>
-                        );
-                      })}
+                      {time.hour}
                     </div>
-                  )}
-                </div>
-              </div>
+                    <div
+                      className={`minute flex h-[46px] w-full max-w-[46px] items-center justify-center rounded-md text-sm font-medium ${isSelected
+                          ? "bg-blue-light-5 text-primary"
+                          : "text-dark-3 dark:text-dark-6"
+                        }`}
+                    >
+                      {time.minute}
+                    </div>
+                    <div
+                      className={`period flex h-[46px] w-full max-w-[46px] items-center justify-center rounded-md text-sm font-medium ${isSelected
+                          ? "bg-blue-light-5 text-primary"
+                          : "text-dark-3 dark:text-dark-6"
+                        }`}
+                    >
+                      {time.period}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </div>
     </>
   );
 };

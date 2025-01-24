@@ -1,28 +1,34 @@
 {
-    "students": [
+    "employees": [
         {
-            "studentId": 1111,
-            "name": "Bahar Constantia",
-            "dateOfBirth": "1984-01-04",
-            "major": "Computer Science"
+            "employeeId": "003926",
+            "name": "Jose Ismael Vasquez",
+            "position": "Analista de Sistemas",
+            "shiftCode": 2
         },
         {
-            "studentId": 2222,
-            "name": "Harold Nona",
-            "dateOfBirth": "1961-05-10",
-            "major": "Communications"
+            "employeeId": "003927",
+            "name": "Maria Fernanda López",
+            "position": "Ingeniera de Software",
+            "shiftCode": 1
         },
         {
-            "studentId": 3333,
-            "name": "Raginolf Arnulf",
-            "dateOfBirth": "1991-10-12",
-            "major": "Business"
+            "employeeId": "003928",
+            "name": "Carlos Alberto Gómez",
+            "position": "Administrador de Redes",
+            "shiftCode": 3
         },
         {
-            "studentId": 4444,
-            "name": "Marvyn Wendi",
-            "dateOfBirth": "1978-09-24",
-            "major": "Psychology"
+            "employeeId": "003929",
+            "name": "Ana Sofía Martínez",
+            "position": "Especialista en Seguridad",
+            "shiftCode": 1
+        },
+        {
+            "employeeId": "003930",
+            "name": "Luis Felipe Rodríguez",
+            "position": "Arquitecto de Software",
+            "shiftCode": 2
         }
     ]
 }

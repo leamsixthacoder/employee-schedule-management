@@ -7,6 +7,10 @@
     cursor: pointer;
     font-weight: 700;
     color: rgb(117, 116, 116);
+    text-align: center; /* Ensures text is centered */
+    min-width: 100px; /* Ensures a consistent minimum width */
+    display: inline-block; /* Ensures the button respects the width and padding */
+    white-space: nowrap; 
 }
 
 .selected {

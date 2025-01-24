@@ -1,10 +1,42 @@
 .week-container {
-  flex-grow: 1; /* Let the input container take the remaining space */
+  padding: 1rem 1rem;
+  min-width: 600px;
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1; 
   margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1rem; */
 }
 
-.button-container {
-  width: 100%;
-
+.shift-container {
+  display: flex;
+  padding-bottom: 1.2rem; 
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
 }
+
+.day-container {
+  flex-shrink: 0;
+  width: 20%;
+  
+}
+
+.time-inputs {
+  flex-grow: 1;
+  position: relative;
+  top: -10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.9rem;
+}
+
+/* .time-inputs label {
+  margin-bottom: 0.5rem;
+}
+
+.time-inputs input {
+  margin-left: 0.5rem;
+  padding: 0.25rem;
+} */
